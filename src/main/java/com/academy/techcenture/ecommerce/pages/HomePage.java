@@ -1,4 +1,4 @@
-package com.academy.techcenture.pages;
+package com.academy.techcenture.ecommerce.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,7 +24,6 @@ public class HomePage {
 
     @FindBy(className = "logout")
     private WebElement signOutLink;
-
 
     //user actions with assertions and validations
     public void clickSingInLink(){

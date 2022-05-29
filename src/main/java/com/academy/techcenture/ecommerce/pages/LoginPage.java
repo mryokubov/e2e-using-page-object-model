@@ -1,4 +1,4 @@
-package com.academy.techcenture.pages;
+package com.academy.techcenture.ecommerce.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

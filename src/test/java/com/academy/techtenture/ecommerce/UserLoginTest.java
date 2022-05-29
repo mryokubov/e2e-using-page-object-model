@@ -1,16 +1,13 @@
-package com.academy.techtenture;
+package com.academy.techtenture.ecommerce;
 
-import com.academy.techcenture.pages.HomePage;
-import com.academy.techcenture.pages.LoginPage;
-import com.academy.techcenture.pages.UserAccountPage;
-import io.github.bonigarcia.wdm.WebDriverManager;
+import com.academy.techcenture.ecommerce.config.Driver;
+import com.academy.techcenture.ecommerce.pages.HomePage;
+import com.academy.techcenture.ecommerce.pages.LoginPage;
+import com.academy.techcenture.ecommerce.pages.UserAccountPage;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.time.Duration;
 
 public class UserLoginTest {
 
@@ -18,19 +15,12 @@ public class UserLoginTest {
 
     @BeforeMethod
     public void setUp() {
-        //browser configuration
-        WebDriverManager.chromedriver().setup();
-        this.driver = new ChromeDriver();
-        this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-        this.driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
-
+        driver = Driver.getDriver("chrome");
         driver.get("http://automationpractice.com/index.php");
     }
 
-
     @Test(priority = 0)
     public void userLoginPositive() {
-
         HomePage homePage = new HomePage(driver);
         LoginPage loginPage = new LoginPage(driver);
         UserAccountPage userAccountPage = new UserAccountPage(driver);
