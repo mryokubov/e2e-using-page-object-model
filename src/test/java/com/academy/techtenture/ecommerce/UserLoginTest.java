@@ -1,5 +1,6 @@
 package com.academy.techtenture.ecommerce;
 
+import com.academy.techcenture.ecommerce.config.ConfigReader;
 import com.academy.techcenture.ecommerce.config.Driver;
 import com.academy.techcenture.ecommerce.pages.HomePage;
 import com.academy.techcenture.ecommerce.pages.LoginPage;
@@ -15,8 +16,8 @@ public class UserLoginTest {
 
     @BeforeMethod
     public void setUp() {
-        driver = Driver.getDriver("chrome");
-        driver.get("http://automationpractice.com/index.php");
+        driver = Driver.getDriver();
+        driver.get(ConfigReader.getProperty("URL"));
     }
 
     @Test(priority = 0)
@@ -29,17 +30,14 @@ public class UserLoginTest {
         userAccountPage.verifyAccountOptions();
         userAccountPage.navigateHome();
         homePage.signOut();
-
     }
 
     @Test(priority = 1)
     public void userLoginNegative() throws InterruptedException {
         HomePage homePage = new HomePage(driver);
         LoginPage loginPage = new LoginPage(driver);
-
         homePage.clickSingInLink();
         loginPage.verifyLoginErrors();
-
     }
 
     @AfterMethod

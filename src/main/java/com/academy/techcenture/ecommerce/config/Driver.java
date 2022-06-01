@@ -16,7 +16,9 @@ public class Driver {
     //hide the constructor so no one can instantiate it
     private Driver(){}
 
-    public static WebDriver getDriver(String browser){
+    public static WebDriver getDriver(){
+
+        String browser = ConfigReader.getProperty("browser");
 
         switch (browser){
             case "chrome":
@@ -38,8 +40,8 @@ public class Driver {
         }
 
         if (driver != null){
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-            driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(ConfigReader.getProperty("implicitWait"))));
+            driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds( Long.parseLong(ConfigReader.getProperty("pageLoadTime"))));
             return driver;
         }
         throw  new RuntimeException("No Driver was found");

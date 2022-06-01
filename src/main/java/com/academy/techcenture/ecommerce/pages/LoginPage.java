@@ -1,5 +1,8 @@
 package com.academy.techcenture.ecommerce.pages;
 
+import com.academy.techcenture.ecommerce.config.ConfigReader;
+import com.academy.techcenture.ecommerce.utils.CommonUtils;
+import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,15 +10,19 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import java.io.IOException;
+
 public class LoginPage {
     //1. web elements
     //2. methods (user actions)
     //3. assertions
 
     private WebDriver driver;
+    private CommonUtils commonUtils;
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
+        this.commonUtils = new CommonUtils();
         PageFactory.initElements(driver, this);
     }
 
@@ -47,7 +54,7 @@ public class LoginPage {
     @FindBy(xpath = "//p[contains(text(),'Please enter your email address')]")
     private WebElement enterEmailTxt;
 
-    @FindBy(xpath = "email_create")
+    @FindBy(xpath = "//label[@for='email_create']")
     private WebElement createAccountEmailLabel;
 
     @FindBy(id = "email_create")
@@ -65,9 +72,10 @@ public class LoginPage {
         Assert.assertTrue(emailLabel.isDisplayed(), "Email label was not dipslayed");
         Assert.assertTrue(passwdLabel.isDisplayed(), "Password label was not dipslayed");
         emailInput.clear();
-        emailInput.sendKeys("kevinlee1234@gmail.com");
+
+        emailInput.sendKeys(ConfigReader.getProperty("username"));
         passwdInput.clear();
-        passwdInput.sendKeys("Kevin123");
+        passwdInput.sendKeys(ConfigReader.getProperty("password"));
 
         Assert.assertTrue(forgotPswdLink.isDisplayed(),"Forgot passwd is not displayed");
         Assert.assertTrue(loginBtn.isEnabled(), "Login Btn is not enabled");
@@ -108,6 +116,20 @@ public class LoginPage {
         loginBtn.click();
 
         Assert.assertTrue(driver.findElement(By.xpath("//div[contains(@class,'alert-danger')]//li")).getText().equals("Password is required."),"Error Message is not cocrect");
+    }
+
+
+    public void enterNewEmailAddress() throws IOException {
+        Assert.assertTrue(createAccountHeaderTxt.isDisplayed());
+        Assert.assertTrue(enterEmailTxt.isDisplayed());
+        Assert.assertTrue(createAccountEmailLabel.isDisplayed());
+
+        String randomEmail = commonUtils.randomEmail();
+        ConfigReader.setProperty("randomEmail", randomEmail);
+        createEmailInput.sendKeys(randomEmail);
+
+        Assert.assertTrue(createAccountBtn.isEnabled());
+        createAccountBtn.click();
     }
 
 
