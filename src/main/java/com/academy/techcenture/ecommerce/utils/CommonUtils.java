@@ -90,8 +90,13 @@ public class CommonUtils {
         return password;
     }
 
-    public static void main(String[] args) {
 
-        System.out.println(new CommonUtils().randomPassword());
+    public String randomApartment( ){
+
+        return String.format(("%04d"), (int) Math.floor(9999*Math.random()));
+
+
     }
+
+
 }

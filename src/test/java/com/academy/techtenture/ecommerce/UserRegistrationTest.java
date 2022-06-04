@@ -5,7 +5,7 @@ import com.academy.techcenture.ecommerce.config.Driver;
 import com.academy.techcenture.ecommerce.pages.HomePage;
 import com.academy.techcenture.ecommerce.pages.LoginPage;
 import com.academy.techcenture.ecommerce.pages.UserAccountPage;
-import com.academy.techcenture.ecommerce.pages.UserRegisterPage;
+import com.academy.techcenture.ecommerce.pages.UserRegistrationPage;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -30,7 +30,7 @@ public class UserRegistrationTest {
     public void userRegistrationPositiveTest() throws IOException {
         HomePage homePage = new HomePage(driver,softAssert);
         LoginPage loginPage = new LoginPage(driver,softAssert);
-        UserRegisterPage registerPage = new UserRegisterPage(driver,softAssert);
+        UserRegistrationPage registerPage = new UserRegistrationPage(driver,softAssert);
         UserAccountPage userAccountPage = new UserAccountPage(driver,softAssert);
 
         homePage.clickSingInLink();
@@ -44,7 +44,6 @@ public class UserRegistrationTest {
 
     @Test
     public void userRegisterInvalidEmail() throws InterruptedException {
-        //todo create an account with invalid email address such as kevin.lee@gmail and kevin.leegmail.com and kevin.lee
 
         HomePage homePage = new HomePage(driver, softAssert);
         LoginPage loginPage = new LoginPage(driver, softAssert);
@@ -59,17 +58,15 @@ public class UserRegistrationTest {
     public void verifyErrorsOnRegisterPage() throws IOException {
         HomePage homePage = new HomePage(driver, softAssert);
         LoginPage loginPage = new LoginPage(driver, softAssert);
-        UserRegisterPage registerPage = new UserRegisterPage(driver, softAssert);
+        UserRegistrationPage registerPage = new UserRegistrationPage(driver, softAssert);
 
         homePage.clickSingInLink();
         loginPage.enterNewEmailAddress();
 
         registerPage.verifyErrorsOnUserRegisterPage();
 
-
         System.out.println("end of test");
         softAssert.assertAll();
-
     }
 
 
