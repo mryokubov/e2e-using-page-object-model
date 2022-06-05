@@ -13,9 +13,9 @@ public class ApachePoiExperiment {
     @Test(dataProvider = "newUsersData")
     public void experimentApachePoiData( Map<String,String> users  ){
 
-        System.out.println(users);
 
     }
+
 
 
     @DataProvider(name = "newUsersData")
