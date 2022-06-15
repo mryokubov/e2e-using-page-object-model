@@ -1,4 +1,4 @@
-package com.academy.techtenture.ecommerce;
+package com.academy.techtenture.ecommerce.e2e;
 
 import com.academy.techcenture.ecommerce.config.ConfigReader;
 import com.academy.techcenture.ecommerce.config.Driver;
@@ -6,6 +6,7 @@ import com.academy.techcenture.ecommerce.pages.HomePage;
 import com.academy.techcenture.ecommerce.pages.LoginPage;
 import com.academy.techcenture.ecommerce.pages.UserAccountPage;
 import com.academy.techcenture.ecommerce.utils.ExcelReader;
+import com.academy.techtenture.ecommerce.base.BaseTest;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -15,17 +16,9 @@ import org.testng.asserts.SoftAssert;
 
 import java.util.Map;
 
-public class UserLoginTest {
+public class UserLoginTest extends BaseTest {
 
-    private WebDriver driver;
-    private SoftAssert softAssert;
 
-    @BeforeMethod
-    public void setUp() {
-        driver = Driver.getDriver();
-        driver.get(ConfigReader.getProperty("URL"));
-        softAssert = new SoftAssert();
-    }
 
     @Test(priority = 0, dataProvider = "userLoginData")
     public void userLoginPositive(Map<String,String> users) {
@@ -51,12 +44,6 @@ public class UserLoginTest {
         softAssert.assertAll();
     }
 
-    @AfterMethod
-    public void cleanUp(){
-        if (driver != null){
-            driver.quit();
-        }
-    }
 
 
     @DataProvider(name = "userLoginData")

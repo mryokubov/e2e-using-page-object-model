@@ -1,38 +1,22 @@
-package com.academy.techtenture.ecommerce;
+package com.academy.techtenture.ecommerce.e2e;
 
-import com.academy.techcenture.ecommerce.config.ConfigReader;
-import com.academy.techcenture.ecommerce.config.Driver;
 import com.academy.techcenture.ecommerce.pages.HomePage;
 import com.academy.techcenture.ecommerce.pages.LoginPage;
 import com.academy.techcenture.ecommerce.pages.UserAccountPage;
 import com.academy.techcenture.ecommerce.pages.UserRegistrationPage;
 import com.academy.techcenture.ecommerce.utils.ExcelReader;
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import com.academy.techtenture.ecommerce.base.BaseTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
-
 import java.io.IOException;
 import java.util.Map;
 
-public class UserRegistrationTest {
+public class UserRegistrationTest extends BaseTest {
 
-    private WebDriver driver;
-    private SoftAssert softAssert;
-
-    @BeforeMethod
-    public void setUp() {
-        driver = Driver.getDriver();
-        driver.get(ConfigReader.getProperty("URL"));
-        softAssert = new SoftAssert();
-    }
 
 
     @Test(priority = 0, dataProvider = "newUsersData")
     public void userRegistrationPositiveTest( Map<String,String> users ) throws IOException {
-
 
         HomePage homePage = new HomePage(driver,softAssert);
         LoginPage loginPage = new LoginPage(driver,softAssert);
@@ -45,7 +29,6 @@ public class UserRegistrationTest {
         userAccountPage.verifyAccountOptions();
         userAccountPage.navigateHome();
         homePage.signOut();
-
 
         softAssert.assertAll();
     }
@@ -77,13 +60,6 @@ public class UserRegistrationTest {
         softAssert.assertAll();
     }
 
-
-    @AfterMethod
-    public void cleanUp(){
-        if (driver != null){
-            driver.quit();
-        }
-    }
 
     @DataProvider(name = "newUsersData")
     public Object[][] getNewUsersData(){
