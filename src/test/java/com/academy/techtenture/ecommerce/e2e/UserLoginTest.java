@@ -1,23 +1,15 @@
 package com.academy.techtenture.ecommerce.e2e;
-
-import com.academy.techcenture.ecommerce.config.ConfigReader;
-import com.academy.techcenture.ecommerce.config.Driver;
 import com.academy.techcenture.ecommerce.pages.HomePage;
 import com.academy.techcenture.ecommerce.pages.LoginPage;
 import com.academy.techcenture.ecommerce.pages.UserAccountPage;
 import com.academy.techcenture.ecommerce.utils.ExcelReader;
 import com.academy.techtenture.ecommerce.base.BaseTest;
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 import java.util.Map;
 
 public class UserLoginTest extends BaseTest {
-
 
 
     @Test(priority = 0, dataProvider = "userLoginData")
@@ -43,7 +35,6 @@ public class UserLoginTest extends BaseTest {
 
         softAssert.assertAll();
     }
-
 
 
     @DataProvider(name = "userLoginData")

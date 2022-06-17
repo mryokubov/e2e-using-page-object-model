@@ -1,15 +1,18 @@
 package com.academy.techcenture.ecommerce.pages;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.asserts.SoftAssert;
 
+import java.util.Map;
+
 public class HomePage {
 
-    private WebDriver driver;
-    private SoftAssert softAssert;
+    protected WebDriver driver;
+    protected SoftAssert softAssert;
 
     public HomePage(WebDriver driver, SoftAssert softAssert){
         this.driver = driver;
@@ -19,13 +22,22 @@ public class HomePage {
 
     //web elements
     @FindBy(xpath = "//a[@class='login']")
-    private WebElement signInLink;
+    protected WebElement signInLink;
 
     @FindBy(linkText = "Contact us")
-    private WebElement contactUsLink;
+    protected WebElement contactUsLink;
 
     @FindBy(className = "logout")
-    private WebElement signOutLink;
+    protected WebElement signOutLink;
+
+    @FindBy(id = "search_query_top")
+    protected WebElement searchInputBox;
+
+    @FindBy(xpath = "//button[contains(@class,'button-search')]")
+    protected WebElement searchBtn;
+
+
+
 
     //user actions with assertions and validations
     public void clickSingInLink(){
@@ -47,6 +59,7 @@ public class HomePage {
             System.out.println("Clicking sign out");
         }
     }
+
 
 
 }
