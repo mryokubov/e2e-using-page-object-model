@@ -1,7 +1,5 @@
 package com.academy.techcenture.ecommerce.pages;
 
-import com.academy.techcenture.ecommerce.config.ConfigReader;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,6 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.asserts.SoftAssert;
 
+import java.io.File;
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;
@@ -53,15 +52,14 @@ public class ContactUsPage {
     @FindBy(xpath = "//span[contains(.,'Home')]")
     private WebElement homeBtn;
 
+    @FindBy(id = "fileUpload")
+    private WebElement attachFileInput;
+
 
     public void contactUs(Map<String, String> data) {
 
-
         Select select = new Select(subjectHeadingDropDown);
         select.selectByVisibleText(data.get("subjectHeading"));
-
-
-
 
         if (data.get("guest").equals("no")){
             //choose from dropdown because we are valid customer
@@ -70,7 +68,6 @@ public class ContactUsPage {
             if (options.size() > 1){
                 orderRef.selectByIndex(1);
             }
-
             softAssert.assertEquals(emailInput.getAttribute("value"), data.get("emailAddress"), "Email addresses do not match");
 
         }else{
@@ -78,6 +75,11 @@ public class ContactUsPage {
             orderRefInput.sendKeys(data.get("orderReference"));
             emailInput.sendKeys(data.get("emailAddress"));
         }
+
+
+        File f = new File("src/main/resources/pics/e2e-using-page-object-model_userLoginPositive.jpg");
+        String absolute = f.getAbsolutePath();
+        attachFileInput.sendKeys(absolute);
 
         messageArea.sendKeys(data.get("message"));
         softAssert.assertTrue(sendBtn.isEnabled(), "Send Button is not enabled");
@@ -89,7 +91,6 @@ public class ContactUsPage {
 
         goHome();
     }
-
 
     private void goHome(){
         softAssert.assertTrue(homeBtn.isDisplayed());

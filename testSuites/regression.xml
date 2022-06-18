@@ -7,6 +7,8 @@
             <class name="com.academy.techtenture.ecommerce.e2e.ContactUsTest"></class>
             <class name="com.academy.techtenture.ecommerce.e2e.SearchFunctionalityTest"></class>
             <class name="com.academy.techtenture.ecommerce.e2e.UserRegistrationTest"></class>
+            <class name="com.academy.techtenture.ecommerce.e2e.SocialNetworksTest"></class>
+            <class name="com.academy.techtenture.ecommerce.e2e.ProductVerificationTest"></class>
         </classes>
     </test>
 </suite>

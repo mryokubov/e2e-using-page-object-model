@@ -14,7 +14,7 @@ import java.util.Map;
 public class ContactUsTest extends BaseTest {
 
 
-    @Test(priority = 0, dataProvider = "contactUs")
+    @Test(priority = 0,  dataProvider = "contactUs")
     public void contactUsPositiveTest( Map<String,String> data ) throws IOException {
 
         HomePage homePage = new HomePage(driver,softAssert);
